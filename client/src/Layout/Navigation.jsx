@@ -5,10 +5,10 @@ function Navigation() {
       <NavLink exact="true" to="/" className="item">
         <i className="jobbhunter icon"></i> JobHunter
       </NavLink>
-      <NavLink exact="true" to="/" className="item">
+      <NavLink exact="true" to="/login" className="item">
         <i className="login icon"></i> Bejelentkezés
       </NavLink>
-      <NavLink exact="true" to="/" className="item">
+      <NavLink exact="true" to="/signup" className="item">
         <i className="register icon"></i> Regisztrálás
       </NavLink>
     </nav>
