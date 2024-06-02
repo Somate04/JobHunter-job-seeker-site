@@ -61,9 +61,12 @@ Bejelentkezés nélkül a vendég felhasználók az alábbi oldalakat tekintheti
 - Bejelentkezés oldala
   - E-mail és jelszó párossal autentikálhatja magát a felhasználó
 - Regisztráció oldala
+
   - Kiválasztható a profil típusa (Munkáltató / Munkavállaló)
   - Munkavállaló típus esetén megadhatóak a korábbi munkatapasztalatok:
+
     - Több-soros szöveges beviteli mezőben, amiben soronként tördelve meg tudjuk adni a munkahelyeinket és a hozzá tartozó pozíciót, illetve a tól-ig évszámot.
+
     ```json
     Halo Haven;Front-end fejlesztő;2021-2022
     Dunder Mifflin;Full-stack fejlesztő;2022-
@@ -258,7 +261,7 @@ Az elkészült program beadása a Canvasen történik, és két dolgot kell ide 
 ## **Pontozás**
 
 - [x] Ennek a README.md fájlnak a kitöltése. (kötelező)
-- [ ] React használata (kötelező)
+- [x] React használata (kötelező)
 - [ ] Redux használata (kötelező)
 - [ ] Navigáció: Navigáció megfelelően változik a be- és kijelentkezésnek megfelelően (1pt)
 - [ ] Navigáció: Az oldal kezeli, hogy munkáltatóként vagy munkavállalóként jelentkezünk be, más más navigációt jelenít meg (1pt)
