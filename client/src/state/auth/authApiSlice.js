@@ -26,7 +26,20 @@ export const authApiSlice = createApi({
         };
       },
     }),
+    addExperience: build.mutation({
+      query: (body) => {
+        return {
+          url: "experiences",
+          method: "POST",
+          body,
+        };
+      },
+    }),
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation } = authApiSlice;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useAddExperienceMutation,
+} = authApiSlice;
