@@ -4,8 +4,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   useAddExperienceMutation,
+  useLoginMutation,
   useRegisterMutation,
 } from "../state/auth/authApiSlice";
+import { login } from "../state/auth/authSlice";
 
 function SignUp() {
   const emailRef = useRef(null);
@@ -16,6 +18,7 @@ function SignUp() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [authRegister] = useRegisterMutation();
+  const [authLogin] = useLoginMutation();
   const [authExperience] = useAddExperienceMutation();
 
   const [checked, setChecked] = useState(false);
@@ -26,21 +29,37 @@ function SignUp() {
     const password = passwordRef.current.value;
     const name = nameRef.current.value;
     const experiencesString = experienceRef.current.value;
-
     try {
-      const user = await authRegister({
+      await authRegister({
         email: email,
         password: password,
         fullname: name,
         role: checked ? "company" : "jobseeker",
       }).unwrap();
-      dispatch(register(user));
+      const result = await authLogin({
+        strategy: "local",
+        email: email,
+        password: password,
+      }).unwrap();
+      dispatch(login(result));
+      if (!checked && experiencesString) {
+        const experiences = experiencesString
+          .split("\n")
+          .filter((line) => line.trim() !== "") // Remove empty lines
+          .map((line) => {
+            const [company, title, interval] = line.split(";");
+            return { company, title, interval };
+          });
 
-      if (!checked) {
-        await authExperience({}).unwrap();
+        for (const experience of experiences) {
+          await authExperience({
+            ...experience,
+          }).unwrap();
+        }
+        navigate("/login");
       }
     } catch (e) {
-      console.error(e.status);
+      console.error("vasd");
     }
   };
 
