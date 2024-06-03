@@ -44,6 +44,9 @@ export const authApiSlice = createApi({
         };
       },
     }),
+    getUser: build.query({
+      query: (userId) => `user/${userId}`,
+    }),
   }),
 });
 
@@ -51,4 +54,5 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useAddExperienceMutation,
+  getUserDataQuery,
 } = authApiSlice;

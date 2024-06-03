@@ -6,8 +6,8 @@ import {
   useAddExperienceMutation,
   useLoginMutation,
   useRegisterMutation,
-} from "../state/auth/authApiSlice";
-import { login } from "../state/auth/authSlice";
+} from "../state/api/authApiSlice";
+import { login } from "../state/authSlice";
 
 function SignUp() {
   const emailRef = useRef(null);
@@ -45,7 +45,7 @@ function SignUp() {
       if (!checked && experiencesString) {
         const experiences = experiencesString
           .split("\n")
-          .filter((line) => line.trim() !== "") // Remove empty lines
+          .filter((line) => line.trim() !== "")
           .map((line) => {
             const [company, title, interval] = line.split(";");
             return { company, title, interval };
@@ -56,10 +56,10 @@ function SignUp() {
             ...experience,
           }).unwrap();
         }
-        navigate("/login");
       }
+      navigate("/");
     } catch (e) {
-      console.error("vasd");
+      console.error("Sign up error");
     }
   };
 

@@ -6,7 +6,6 @@ import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import Profile from "./Profile/Profile";
 import NewAd from "./NewAd/NewAd";
-import Logout from "./Logout/Logout";
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/new" element={<NewAd />} />
-          <Route path="/logout" element={<Logout />} />
           <Route path="/" element={<Home />} />
         </Route>
       </Routes>
