@@ -11,7 +11,7 @@ function Navigation() {
   const dispatch = useDispatch();
 
   return (
-    <nav className="ui secondary menu">
+    <nav>
       <NavLink exact="true" to="/" className="item">
         <i className="jobbhunter icon"></i> JobHunter
       </NavLink>

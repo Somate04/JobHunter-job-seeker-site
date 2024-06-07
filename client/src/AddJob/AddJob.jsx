@@ -48,7 +48,7 @@ function AddJob() {
         salaryTo: to,
         type: type,
         city: city,
-        homeOffice: homeOffice,
+        homeOffice: Boolean(homeOffice),
       }).unwrap();
       navigate("/");
     } catch (e) {

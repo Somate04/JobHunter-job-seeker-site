@@ -26,7 +26,11 @@ export const jobApi = createApi({
         };
       },
     }),
+    getAllJobs: build.query({
+      query: () => "jobs",
+      transformResponse: (response) => response.data,
+    }),
   }),
 });
 
-export const { useRegisterJobMutation } = jobApi;
+export const { useRegisterJobMutation, useGetAllJobsQuery } = jobApi;
