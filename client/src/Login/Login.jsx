@@ -47,7 +47,7 @@ function Login() {
         id="password"
         label="Jelszó"
       />
-      <Button variant="standard" type="submit">
+      <Button variant="standard" type="submit" color="error">
         Bejelentkezés
       </Button>
     </form>

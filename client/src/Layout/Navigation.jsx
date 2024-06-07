@@ -8,7 +8,6 @@ import { logout } from "../state/authSlice";
 function Navigation() {
   const user = useSelector(selectCurrentUser);
   const role = useSelector(selectCurrentUserRole);
-  console.log(role);
   const dispatch = useDispatch();
 
   return (

@@ -5,7 +5,7 @@ import Home from "./Home/Home";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
 import Profile from "./Profile/Profile";
-import NewAd from "./NewAd/NewAd";
+import AddJob from "./AddJob/AddJob";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/new" element={<NewAd />} />
+          <Route path="/new" element={<AddJob />} />
           <Route path="/" element={<Home />} />
         </Route>
       </Routes>

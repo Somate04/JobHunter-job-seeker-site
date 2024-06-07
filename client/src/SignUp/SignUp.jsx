@@ -106,7 +106,7 @@ function SignUp() {
         fullWidth={true}
       />
       <Button variant="standard" type="submit">
-        Elküld
+        Regisztrálás
       </Button>
     </form>
   );
