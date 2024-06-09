@@ -1,54 +1,45 @@
-import { useGetAllJobsQuery } from "../state/api/jobApiSlice";
-import { List, ListItem, ListItemText, Typography, Box } from "@mui/material";
+import { useRef, useState } from "react";
+import {
+  useGetAllJobsQuery,
+  useGetJobByPosQuery,
+} from "../state/api/jobApiSlice";
+import { TextField, Button } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import JobListings from "./JobListings";
 
 function Home() {
   const { data: jobs, isLoading } = useGetAllJobsQuery();
-
-  const typeSwitch = (type) => {
-    switch (type) {
-      case "full-time":
-        return "Teljes állás";
-      case "part-time":
-        return "Részmunkaidős";
-      case "internship":
-        return "Gyakornoki ";
-    }
+  const searchRef = useRef("");
+  const [filteredJobs, setFilteredJobs] = useState([]);
+  const [searchedString, setSearchedString] = useState("");
+  const handleClick = () => {
+    const search = searchRef.current.value;
+    setFilteredJobs(
+      jobs.filter((job) =>
+        job.position.toLowerCase().startsWith(search.toLowerCase())
+      )
+    );
+    setSearchedString(search);
   };
   return (
     <>
-      <List sx={{ width: "75%" }}>
-        {!isLoading &&
-          jobs.map((job) => (
-            <ListItem key={job.id}>
-              <ListItemText
-                primary={job.position}
-                secondary={
-                  <Box
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
-                    <Typography
-                      variant="body2"
-                      color="textSecondary"
-                      sx={{ verticalAlign: "top" }}
-                    >
-                      {job.city}
-                    </Typography>
-                    <Box textAlign="right">
-                      <Typography variant="body2" color="textPrimary">
-                        {job.salaryFrom}-{job.salaryTo}Ft
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary">
-                        {typeSwitch(job.type)}
-                      </Typography>
-                    </Box>
-                  </Box>
-                }
-              />
-            </ListItem>
-          ))}
-      </List>
+      <TextField
+        id="outlined-basic"
+        label="Keresés"
+        variant="outlined"
+        inputRef={searchRef}
+      />
+      <Button
+        variant="contained"
+        startIcon={<SearchIcon />}
+        onClick={handleClick}
+        onChange={handleClick}
+      >
+        Keresés
+      </Button>
+      {!isLoading && (
+        <JobListings jobs={searchedString === "" ? jobs : filteredJobs} />
+      )}
     </>
   );
 }
