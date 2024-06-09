@@ -11,43 +11,36 @@ function Filter({
   setIsOpen,
   handleSubmit,
   setFrom,
+  from,
   setTo,
+  to,
   setCity,
+  city,
   type,
   setType,
   homeOffice,
   setHomeOffice,
 }) {
-  const fromRef = useRef(null);
-  const toRef = useRef(null);
-  const cityRef = useRef("");
-  const handleChange = (e) => {
-    setType(e.target.value);
-  };
-  const handleCheck = (e) => {
-    setHomeOffice(e.target.value);
-  };
-
   return (
     <form onSubmit={handleSubmit}>
       <h2>Szűrők</h2>
       <p>Fizetési sáv alja</p>
       <TextField
-        inputRef={fromRef}
+        value={from}
         variant="standard"
         type="number"
         id="from"
         label="-tól"
-        onChange={() => setFrom(Number(fromRef.current.value))}
+        onChange={(e) => setFrom(e.target.value)}
       />
       <p>Fizetési sáv teteje</p>
       <TextField
-        inputRef={toRef}
+        value={to}
         variant="standard"
         type="number"
         id="to"
         label="-ig"
-        onChange={() => setTo(Number(toRef.current.value))}
+        onChange={(e) => setTo(e.target.value)}
       />
       <p>Foglalkoztatás formája</p>
       <TextField
@@ -57,7 +50,7 @@ function Filter({
         label="Foglalkoztatás formája"
         select
         sx={{ minWidth: 200 }}
-        onChange={handleChange}
+        onChange={(e) => setType(e.target.value)}
         input={<OutlinedInput label="Foglalkoztatás formája" />}
       >
         <MenuItem value={"full-time"}>Teljes állás</MenuItem>
@@ -66,14 +59,18 @@ function Filter({
       </TextField>
       <p>Település</p>
       <TextField
-        inputRef={cityRef}
+        inputRef={city}
         variant="standard"
         type="text"
         id="city"
         label="Település"
-        onChange={() => setCity(cityRef.current.value)}
+        onChange={(e) => setCity(e.target.value)}
       />
-      <Checkbox onChange={handleCheck} value={homeOffice} id="homeOffice" />{" "}
+      <Checkbox
+        onChange={(e) => setHomeOffice(e.target.value)}
+        value={homeOffice}
+        id="homeOffice"
+      />{" "}
       Home Office lehetőség
       <Button type="submit">Szűrés</Button>
       <Button onClick={() => setIsOpen(false)}>Vissza</Button>
