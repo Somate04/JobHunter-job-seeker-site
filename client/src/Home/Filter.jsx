@@ -5,18 +5,22 @@ import {
   MenuItem,
   Checkbox,
 } from "@mui/material";
+import { useRef } from "react";
 
 function Filter({
   setIsOpen,
   handleSubmit,
-  fromRef,
-  toRef,
-  cityRef,
+  setFrom,
+  setTo,
+  setCity,
   type,
   setType,
   homeOffice,
   setHomeOffice,
 }) {
+  const fromRef = useRef(null);
+  const toRef = useRef(null);
+  const cityRef = useRef("");
   const handleChange = (e) => {
     setType(e.target.value);
   };
@@ -34,6 +38,7 @@ function Filter({
         type="number"
         id="from"
         label="-tól"
+        onChange={() => setFrom(Number(fromRef.current.value))}
       />
       <p>Fizetési sáv teteje</p>
       <TextField
@@ -42,6 +47,7 @@ function Filter({
         type="number"
         id="to"
         label="-ig"
+        onChange={() => setTo(Number(toRef.current.value))}
       />
       <p>Foglalkoztatás formája</p>
       <TextField
@@ -65,6 +71,7 @@ function Filter({
         type="text"
         id="city"
         label="Település"
+        onChange={() => setCity(cityRef.current.value)}
       />
       <Checkbox onChange={handleCheck} value={homeOffice} id="homeOffice" />{" "}
       Home Office lehetőség
