@@ -30,6 +30,10 @@ export const jobApi = createApi({
       query: () => "jobs",
       transformResponse: (response) => response.data,
     }),
+    getJobById: build.query({
+      query: (jobId) => `jobs?id=${jobId}`,
+      transformResponse: (response) => response.data,
+    }),
     getFilterJobs: build.query({
       query: ({ from, to, type, city, homeOffice }) => {
         let queryString = `jobs?`;
@@ -56,5 +60,6 @@ export const jobApi = createApi({
 export const {
   useRegisterJobMutation,
   useGetAllJobsQuery,
+  useGetJobByIdQuery,
   useGetFilterJobsQuery,
 } = jobApi;

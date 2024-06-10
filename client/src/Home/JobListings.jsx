@@ -17,7 +17,7 @@ function JobListings({ jobs }) {
   return (
     <List sx={{ width: "75%" }}>
       {jobs.map((job) => (
-        <Link to="/jobdescription">
+        <Link to={`/jobdescription/${job.id}`}>
           <ListItem key={job.id}>
             <ListItemText
               primary={job.position}

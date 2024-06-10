@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/login" element={<Login />} />
-          <Route path="/jobdescription" element={<Jobdescription />} />
+          <Route path="/jobdescription/:jobId" element={<Jobdescription />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/new" element={<AddJob />} />
