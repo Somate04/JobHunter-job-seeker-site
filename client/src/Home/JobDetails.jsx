@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useGetJobByIdQuery } from "../state/api/jobApiSlice";
+import {
+  useGetJobByIdQuery,
+  useApplyForJobMutation,
+} from "../state/api/jobApiSlice";
 import {
   Container,
   Box,
@@ -9,14 +12,16 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Chip,
   Paper,
   TableContainer,
 } from "@mui/material";
+import { useState } from "react";
 
-function Jobdescription() {
+function JobDetails() {
   const { jobId } = useParams();
   const { data: job, isLoading } = useGetJobByIdQuery(jobId);
+  const [applyForJob] = useApplyForJobMutation();
+  const [success, setSuccess] = useState(false);
   const typeSwitch = (type) => {
     switch (type) {
       case "full-time":
@@ -29,15 +34,24 @@ function Jobdescription() {
         return "";
     }
   };
+  const handleClick = async () => {
+    try {
+      await applyForJob({ jobId: Number(jobId) }).unwrap();
+      setSuccess(true);
+    } catch (error) {
+      console.error("Application error");
+    }
+  };
   return (
     <Container maxWidth="md">
       {!isLoading && (
         <Box sx={{ my: 4 }}>
           <Box mt={4} component={Paper} p={4} elevation={3}>
             <Box display="flex" justifyContent="flex-end">
-              <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" onClick={handleClick}>
                 Jelentkezés
               </Button>
+              {success && <p>A jelentkezés sikeresen megtörtént</p>}
             </Box>
             <Typography variant="h5" component="h2" gutterBottom>
               Cég részletei
@@ -109,4 +123,4 @@ function Jobdescription() {
     </Container>
   );
 }
-export default Jobdescription;
+export default JobDetails;

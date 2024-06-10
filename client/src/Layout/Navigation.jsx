@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { selectCurrentUser, selectCurrentUserRole } from "../state/authSlice";
@@ -9,6 +9,11 @@ function Navigation() {
   const user = useSelector(selectCurrentUser);
   const role = useSelector(selectCurrentUserRole);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/");
+    dispatch(logout());
+  };
 
   return (
     <nav>
@@ -26,7 +31,11 @@ function Navigation() {
         </>
       ) : (
         <>
-          <NavLink exact="true" to="/profile" className="item">
+          <NavLink
+            exact="true"
+            to={`/profile${role}/${user.id}`}
+            className="item"
+          >
             <i className="register icon"></i> Profilom
           </NavLink>
           {role === "company" && (
@@ -34,7 +43,7 @@ function Navigation() {
               <i className="register icon"></i> Álláshirdetés hozzáadása
             </NavLink>
           )}
-          <Button variant="standard" onClick={() => dispatch(logout())}>
+          <Button variant="standard" onClick={handleClick}>
             Kijelentkezés
           </Button>
         </>

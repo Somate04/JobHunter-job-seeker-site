@@ -54,6 +54,15 @@ export const jobApi = createApi({
       },
       transformResponse: (response) => response.data,
     }),
+    applyForJob: build.mutation({
+      query: (body) => {
+        return {
+          url: "applicants",
+          method: "POST",
+          body,
+        };
+      },
+    }),
   }),
 });
 
@@ -62,4 +71,5 @@ export const {
   useGetAllJobsQuery,
   useGetJobByIdQuery,
   useGetFilterJobsQuery,
+  useApplyForJobMutation,
 } = jobApi;

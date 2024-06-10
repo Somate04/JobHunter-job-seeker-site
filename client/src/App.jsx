@@ -4,9 +4,10 @@ import Layout from "./Layout/Layout";
 import Home from "./Home/Home";
 import Login from "./Login/Login";
 import SignUp from "./SignUp/SignUp";
-import Profile from "./Profile/Profile";
+import ProfileJobSeeker from "./Profile/ProfileJobSeeker";
 import AddJob from "./AddJob/AddJob";
-import Jobdescription from "./Home/JobDescriotion";
+import JobDetails from "./Home/JobDetails";
+import ProfileCompany from "./Profile/ProfileCompany";
 
 function App() {
   return (
@@ -14,9 +15,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="/login" element={<Login />} />
-          <Route path="/jobdescription/:jobId" element={<Jobdescription />} />
+          <Route path="/jobdescription/:jobId" element={<JobDetails />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profilejobseeker/:userId"
+            element={<ProfileJobSeeker />}
+          />
+          <Route path="/profilecompany/:userId" element={<ProfileCompany />} />
           <Route path="/new" element={<AddJob />} />
           <Route path="/" element={<Home />} />
         </Route>
