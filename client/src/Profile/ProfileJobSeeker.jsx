@@ -19,11 +19,10 @@ import {
 
 function ProfileJobSeeker() {
   const { userId } = useParams();
-  const { data: user, isLoading } = useGetUserQuery(userId);
-
-  while (isLoading) {}
-  const { data: experiences, isExpLoading } =
+  const { data: user, isLoading: isUserLoading } = useGetUserQuery(userId);
+  const { data: experiences, isLoading: isExperienceLoading } =
     useGetExperienceByUserQuery(userId);
+  const isLoading = isUserLoading || isExperienceLoading;
   return (
     <Container maxWidth="md">
       {!isLoading && (
@@ -64,7 +63,7 @@ function ProfileJobSeeker() {
                     </TableCell>
                     <TableCell></TableCell>
                   </TableRow>
-                  {!isExpLoading &&
+                  {!isLoading &&
                     experiences.map((experience) => (
                       <TableRow>
                         <TableCell component="th" scope="row">

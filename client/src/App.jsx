@@ -8,6 +8,7 @@ import ProfileJobSeeker from "./Profile/ProfileJobSeeker";
 import AddJob from "./AddJob/AddJob";
 import JobDetails from "./Home/JobDetails";
 import ProfileCompany from "./Profile/ProfileCompany";
+import Applicants from "./Profile/Applicants";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             element={<ProfileJobSeeker />}
           />
           <Route path="/profilecompany/:userId" element={<ProfileCompany />} />
+          <Route path="applicants/:jobId" element={<Applicants />} />
           <Route path="/new" element={<AddJob />} />
           <Route path="/" element={<Home />} />
         </Route>

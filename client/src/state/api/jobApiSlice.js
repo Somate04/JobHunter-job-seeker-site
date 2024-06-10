@@ -63,6 +63,13 @@ export const jobApi = createApi({
         };
       },
     }),
+    getJobByUser: build.query({
+      query: (userId) => `jobs?userId=${userId}`,
+      transformResponse: (response) => response.data,
+    }),
+    getApplicants: build.query({
+      query: (jobId) => `applicants?jobId=${jobId}`,
+    }),
   }),
 });
 
@@ -72,4 +79,6 @@ export const {
   useGetJobByIdQuery,
   useGetFilterJobsQuery,
   useApplyForJobMutation,
+  useGetJobByUserQuery,
+  useGetApplicantsQuery,
 } = jobApi;
