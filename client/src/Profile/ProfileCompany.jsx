@@ -23,7 +23,10 @@ import CreateIcon from "@mui/icons-material/Create";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate, useParams } from "react-router-dom";
-import { useGetJobByUserQuery } from "../state/api/jobApiSlice";
+import {
+  useDeleteJobMutation,
+  useGetJobByUserQuery,
+} from "../state/api/jobApiSlice";
 import { useEffect } from "react";
 function ProfileCompany() {
   const { userId } = useParams();
@@ -34,11 +37,18 @@ function ProfileCompany() {
     refetch,
   } = useGetJobByUserQuery(userId);
   const navigate = useNavigate();
+  const [deleteJob] = useDeleteJobMutation();
+
   useEffect(() => {
     if (userId) {
       refetch();
     }
   }, [userId, refetch]);
+
+  const handleDelete = async (jobId) => {
+    await deleteJob(jobId);
+    refetch();
+  };
 
   return (
     <Container maxWidth="md">
@@ -91,7 +101,7 @@ function ProfileCompany() {
                   <VisibilityIcon />
                   Megtekintés
                 </IconButton>
-                <IconButton color="error">
+                <IconButton color="error" onClick={() => handleDelete(job.id)}>
                   <DeleteIcon />
                   Törlés
                 </IconButton>

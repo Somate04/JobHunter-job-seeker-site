@@ -70,6 +70,9 @@ export const jobApi = createApi({
     getApplicants: build.query({
       query: (jobId) => `applicants?jobId=${jobId}`,
     }),
+    deleteJob: build.mutation({
+      query: (jobId) => ({ url: `jobs/${jobId}`, method: "DELETE" }),
+    }),
   }),
 });
 
@@ -81,4 +84,5 @@ export const {
   useApplyForJobMutation,
   useGetJobByUserQuery,
   useGetApplicantsQuery,
+  useDeleteJobMutation,
 } = jobApi;
