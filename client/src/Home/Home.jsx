@@ -18,6 +18,7 @@ function Home() {
   const [city, setCity] = useState("");
   const [type, setType] = useState("");
   const [homeOffice, setHomeOffice] = useState(false);
+  const [isFiltering, setIsFiltering] = useState(false);
 
   const { data: filteredJobs, isFilteredLoading } = useGetFilterJobsQuery({
     from: from,
@@ -28,8 +29,7 @@ function Home() {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    !isFilteredLoading && console.log(filteredJobs);
-    setIsOpen(false);
+    setIsFiltering(true);
   };
   return (
     <>
@@ -43,6 +43,7 @@ function Home() {
       {isOpen && (
         <Filter
           setIsOpen={setIsOpen}
+          setIsFiltering={setIsFiltering}
           handleSubmit={handleSubmit}
           setFrom={setFrom}
           from={from}
@@ -56,7 +57,9 @@ function Home() {
           setHomeOffice={setHomeOffice}
         />
       )}
-      {!isLoading && !isFilteredLoading && <JobListings jobs={jobs} />}
+      {!isLoading && !isFilteredLoading && (
+        <JobListings jobs={!isFiltering ? jobs : filteredJobs} />
+      )}
     </>
   );
 }

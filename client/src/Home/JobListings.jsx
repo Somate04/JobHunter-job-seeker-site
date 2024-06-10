@@ -1,4 +1,5 @@
 import { List, ListItem, ListItemText, Typography, Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function JobListings({ jobs }) {
   const typeSwitch = (type) => {
@@ -16,34 +17,36 @@ function JobListings({ jobs }) {
   return (
     <List sx={{ width: "75%" }}>
       {jobs.map((job) => (
-        <ListItem key={job.id}>
-          <ListItemText
-            primary={job.position}
-            secondary={
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Typography
-                  variant="body2"
-                  color="textSecondary"
-                  sx={{ verticalAlign: "top" }}
+        <Link to="/jobdescription">
+          <ListItem key={job.id}>
+            <ListItemText
+              primary={job.position}
+              secondary={
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
                 >
-                  {job.city}
-                </Typography>
-                <Box textAlign="right">
-                  <Typography variant="body2" color="textPrimary">
-                    {job.salaryFrom}-{job.salaryTo}Ft
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    sx={{ verticalAlign: "top" }}
+                  >
+                    {job.city}
                   </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    {typeSwitch(job.type)}
-                  </Typography>
+                  <Box textAlign="right">
+                    <Typography variant="body2" color="textPrimary">
+                      {job.salaryFrom}-{job.salaryTo}Ft
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary">
+                      {typeSwitch(job.type)}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
-            }
-          />
-        </ListItem>
+              }
+            />
+          </ListItem>
+        </Link>
       ))}
     </List>
   );

@@ -9,6 +9,7 @@ import { useRef } from "react";
 
 function Filter({
   setIsOpen,
+  setIsFiltering,
   handleSubmit,
   setFrom,
   from,
@@ -21,6 +22,15 @@ function Filter({
   homeOffice,
   setHomeOffice,
 }) {
+  const handleClick = () => {
+    setFrom("");
+    setTo("");
+    setCity("");
+    setType("");
+    setHomeOffice(false);
+    setIsFiltering(false);
+    setIsOpen(false);
+  };
   return (
     <form onSubmit={handleSubmit}>
       <h2>Szűrők</h2>
@@ -59,7 +69,7 @@ function Filter({
       </TextField>
       <p>Település</p>
       <TextField
-        inputRef={city}
+        value={city}
         variant="standard"
         type="text"
         id="city"
@@ -67,13 +77,13 @@ function Filter({
         onChange={(e) => setCity(e.target.value)}
       />
       <Checkbox
-        onChange={(e) => setHomeOffice(e.target.value)}
-        value={homeOffice}
+        onChange={(e) => setHomeOffice(e.target.checked)}
+        checked={homeOffice}
         id="homeOffice"
-      />{" "}
+      />
       Home Office lehetőség
       <Button type="submit">Szűrés</Button>
-      <Button onClick={() => setIsOpen(false)}>Vissza</Button>
+      <Button onClick={handleClick}>Bezár</Button>
     </form>
   );
 }

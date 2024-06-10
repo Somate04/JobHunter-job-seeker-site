@@ -33,16 +33,16 @@ export const jobApi = createApi({
     getFilterJobs: build.query({
       query: ({ from, to, type, city, homeOffice }) => {
         let queryString = `jobs?`;
-        if (from) {
+        if (from || from !== "") {
           queryString += `salaryFrom[$gt]=${Number(from)}&`;
         }
-        if (to) {
+        if (to || to !== "") {
           queryString += `salaryTo[$lt]=${Number(to)}&`;
         }
-        if (type) {
+        if (type || type !== "") {
           queryString += `type=${type}&`;
         }
-        if (city) {
+        if (city || city !== "") {
           queryString += `city=${city}&`;
         }
         queryString += `homeOffice=${Boolean(homeOffice)}&`;
