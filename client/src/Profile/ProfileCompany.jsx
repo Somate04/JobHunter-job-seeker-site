@@ -24,10 +24,22 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetJobByUserQuery } from "../state/api/jobApiSlice";
+import { useEffect } from "react";
 function ProfileCompany() {
   const { userId } = useParams();
-  const { data: jobs, isLoading } = useGetJobByUserQuery(userId);
+  const {
+    data: jobs,
+    isLoading,
+    error,
+    refetch,
+  } = useGetJobByUserQuery(userId);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (userId) {
+      refetch();
+    }
+  }, [userId, refetch]);
+
   return (
     <Container maxWidth="md">
       <Box sx={{ my: 4 }}>
@@ -87,7 +99,11 @@ function ProfileCompany() {
             </Card>
           ))}
         <Box display="flex" justifyContent="center" mt={4}>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => navigate("/new")}
+          >
             Hirdetés hozzáadása
           </Button>
         </Box>

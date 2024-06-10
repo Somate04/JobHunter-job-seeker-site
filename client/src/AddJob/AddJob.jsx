@@ -6,6 +6,7 @@ import {
   OutlinedInput,
   InputLabel,
   Button,
+  Slider,
 } from "@mui/material";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -16,14 +17,12 @@ function AddJob() {
   const companyRef = useRef(null);
   const positionRef = useRef(null);
   const descriptionRef = useRef(null);
-  const fromRef = useRef(null);
-  const toRef = useRef(null);
   const cityRef = useRef(null);
   const [type, setType] = useState("");
   const [homeOffice, setHomeOffice] = useState(false);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [registerJob] = useRegisterJobMutation();
+  const [range, setRange] = useState([100000, 500000]);
 
   const handleChange = (e) => {
     setType(e.target.value);
@@ -31,13 +30,16 @@ function AddJob() {
   const handleCheck = (e) => {
     setHomeOffice(e.target.value);
   };
+  const handleRange = (e, newValue) => {
+    setRange(newValue);
+  };
   const HandleSubmit = async (e) => {
     e.preventDefault();
     const company = companyRef.current.value;
     const position = positionRef.current.value;
     const desc = descriptionRef.current.value;
-    const from = Number(fromRef.current.value);
-    const to = Number(toRef.current.value);
+    const from = Number(range[0]);
+    const to = Number(range[1]);
     const city = cityRef.current.value;
     try {
       await registerJob({
@@ -82,19 +84,24 @@ function AddJob() {
         rows={10}
         fullWidth={true}
       />
-      <TextField
-        inputRef={fromRef}
-        variant="standard"
-        type="number"
-        id="from"
-        label="-tól"
-      />
-      <TextField
-        inputRef={toRef}
-        variant="standard"
-        type="number"
-        id="to"
-        label="-ig"
+      <p>Fizetési sáv</p>
+      <Slider
+        value={range}
+        onChange={handleRange}
+        min={0}
+        max={2000000}
+        step={10000}
+        marks
+        valueLabelDisplay="on"
+        valueLabelFormat={(value) => (
+          <div>
+            {new Intl.NumberFormat("hu-HU", {
+              style: "currency",
+              currency: "HUF",
+              maximumSignificantDigits: 6,
+            }).format(value)}
+          </div>
+        )}
       />
       <TextField
         id="select"

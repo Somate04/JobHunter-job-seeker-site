@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useGetAllJobsQuery,
   useGetFilterJobsQuery,
@@ -10,7 +10,12 @@ import JobListings from "./JobListings";
 import Filter from "./Filter";
 
 function Home() {
-  const { data: jobs, isLoading } = useGetAllJobsQuery();
+  const {
+    data: jobs,
+    isLoading,
+    error,
+    refetch: refetchAllJobs,
+  } = useGetAllJobsQuery();
   const [isOpen, setIsOpen] = useState(false);
 
   const [from, setFrom] = useState("");
@@ -20,13 +25,35 @@ function Home() {
   const [homeOffice, setHomeOffice] = useState(false);
   const [isFiltering, setIsFiltering] = useState(false);
 
-  const { data: filteredJobs, isFilteredLoading } = useGetFilterJobsQuery({
+  const {
+    data: filteredJobs,
+    isFilteredLoading,
+    refetch: refetchFilteredJobs,
+  } = useGetFilterJobsQuery({
     from: from,
     to: to,
     type: type,
     city: city,
     homeOffice: homeOffice,
   });
+
+  useEffect(() => {
+    if (isFiltering) {
+      refetchFilteredJobs();
+    } else {
+      refetchAllJobs();
+    }
+  }, [
+    from,
+    to,
+    city,
+    type,
+    homeOffice,
+    isFiltering,
+    refetchFilteredJobs,
+    refetchAllJobs,
+  ]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsFiltering(true);

@@ -36,7 +36,18 @@ function JobListings({ jobs }) {
                   </Typography>
                   <Box textAlign="right">
                     <Typography variant="body2" color="textPrimary">
-                      {job.salaryFrom}-{job.salaryTo}Ft
+                      {new Intl.NumberFormat("hu-HU", {
+                        style: "currency",
+                        currency: "HUF",
+                        maximumSignificantDigits: 6,
+                      }).format(job.salaryFrom)}{" "}
+                      -{" "}
+                      {new Intl.NumberFormat("hu-HU", {
+                        style: "currency",
+                        currency: "HUF",
+                        maximumSignificantDigits: 6,
+                      }).format(job.salaryTo)}
+                      Ft
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
                       {typeSwitch(job.type)}

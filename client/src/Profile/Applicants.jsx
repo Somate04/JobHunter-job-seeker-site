@@ -20,7 +20,6 @@ import {
 } from "@mui/material";
 import Modal from "react-modal";
 import { useState } from "react";
-import { useGetExperienceByUserQuery } from "../state/api/authApiSlice";
 Modal.setAppElement(root);
 function Applicants() {
   const { jobId } = useParams();
