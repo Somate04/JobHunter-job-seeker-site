@@ -69,6 +69,7 @@ function AddJob() {
               id="company"
               label="Cég"
               autoFocus
+              required
             />
           </td>
           <td>
@@ -78,6 +79,7 @@ function AddJob() {
               type="text"
               id="position"
               label="Pozíció"
+              required
             />
           </td>
         </tr>
@@ -92,6 +94,7 @@ function AddJob() {
               multiline={true}
               rows={10}
               fullWidth={true}
+              required
             />
           </td>
         </tr>
@@ -147,6 +150,7 @@ function AddJob() {
               type="text"
               id="city"
               label="Település"
+              required
             />
           </td>
           <td>

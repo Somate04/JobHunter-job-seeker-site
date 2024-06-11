@@ -1,5 +1,5 @@
 import { TextField, Button } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useLoginMutation } from "../state/api/authApiSlice";
 import { login } from "../state/authSlice";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,8 @@ function Login() {
   const [authLogin] = useLoginMutation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [error, setError] = useState(false);
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +30,7 @@ function Login() {
       navigate("/", { replace: true });
     } catch (e) {
       console.error("Login error");
+      setError(true);
     }
   };
 
@@ -39,6 +42,9 @@ function Login() {
         type="text"
         id="email"
         label="Email cím"
+        error={error}
+        helperText={error && "Incorrect email or password!"}
+        required
       />
       <TextField
         inputRef={passwordRef}
@@ -47,6 +53,8 @@ function Login() {
         id="password"
         label="Jelszó"
         sx={{ marginLeft: "10px" }}
+        error={error}
+        required
       />
       <Button
         variant="contained"

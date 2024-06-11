@@ -134,7 +134,6 @@ function SignUp() {
               multiline={true}
               rows={10}
               fullWidth={true}
-              required={!checked}
             />
           </td>
         </tr>

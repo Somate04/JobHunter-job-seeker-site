@@ -14,17 +14,26 @@ import {
   TableContainer,
 } from "@mui/material";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 Modal.setAppElement(root);
 function Applicants() {
   const { jobId } = useParams();
-  const { data: users, isLoading } = useGetApplicantsQuery(jobId);
+  const {
+    data: users,
+    isLoading,
+    refetch: refetchApplicants,
+  } = useGetApplicantsQuery(jobId);
   const [modalUser, setModalUser] = useState(1);
   const [modalIsOpen, setModal] = useState(false);
   const handleClick = (user) => {
     setModal(true);
     setModalUser(user);
   };
+
+  useEffect(() => {
+    refetchApplicants();
+  }, [refetchApplicants]);
+
   const modalStyles = {
     content: {
       top: "50%",
@@ -33,7 +42,7 @@ function Applicants() {
       bottom: "auto",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
-      backgroundColor: "rgb(226, 232, 240)",
+      backgroundColor: "white",
       borderRadius: "15px",
       borderColor: "rgb(226, 232, 240)",
     },
@@ -43,7 +52,7 @@ function Applicants() {
     setModalUser(0);
   };
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ marginTop: "5%" }}>
       {!isLoading && (
         <Box sx={{ my: 4 }}>
           <Typography variant="h4" gutterBottom>
@@ -58,7 +67,10 @@ function Applicants() {
                 >
                   {user.user.fullname}
                 </Typography>
-                <Button onClick={() => handleClick(user.user)}>
+                <Button
+                  onClick={() => handleClick(user.user)}
+                  sx={{ color: "#1e293b" }}
+                >
                   Profil megtekintése
                 </Button>
                 <Modal
@@ -108,7 +120,7 @@ function Applicants() {
                   <Button
                     onClick={closeModal}
                     variant="contained"
-                    color="success"
+                    sx={{ background: "#1e293b", marginTop: "10px" }}
                   >
                     Vissza
                   </Button>
