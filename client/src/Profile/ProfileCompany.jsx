@@ -7,12 +7,6 @@ import {
   Chip,
   CardContent,
   Stack,
-  Table,
-  TableBody,
-  TableRow,
-  TableCell,
-  Paper,
-  TableContainer,
   CardActions,
   IconButton,
 } from "@mui/material";
@@ -51,11 +45,8 @@ function ProfileCompany() {
   };
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ marginTop: "5%" }}>
       <Box sx={{ my: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Profilom
-        </Typography>
         <Typography variant="h6" gutterBottom>
           A te hirdetéseid:
         </Typography>
@@ -90,18 +81,23 @@ function ProfileCompany() {
                 </Stack>
               </CardContent>
               <CardActions>
-                <IconButton color="primary">
+                <IconButton sx={{ color: "#1e293b" }} size="small">
                   <CreateIcon />
                   Szerkesztés
                 </IconButton>
                 <IconButton
-                  color="primary"
+                  sx={{ color: "#1e293b" }}
                   onClick={() => navigate(`/applicants/${job.id}`)}
+                  size="small"
                 >
                   <VisibilityIcon />
                   Megtekintés
                 </IconButton>
-                <IconButton color="error" onClick={() => handleDelete(job.id)}>
+                <IconButton
+                  color="error"
+                  onClick={() => handleDelete(job.id)}
+                  size="small"
+                >
                   <DeleteIcon />
                   Törlés
                 </IconButton>
@@ -111,7 +107,7 @@ function ProfileCompany() {
         <Box display="flex" justifyContent="center" mt={4}>
           <Button
             variant="contained"
-            color="primary"
+            sx={{ background: "#1e293b" }}
             onClick={() => navigate("/new")}
           >
             Hirdetés hozzáadása

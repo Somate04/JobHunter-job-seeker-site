@@ -16,7 +16,7 @@ import {
   TableContainer,
 } from "@mui/material";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectCurrentUserRole } from "../state/authSlice";
 
 function JobDetails() {
@@ -24,8 +24,7 @@ function JobDetails() {
   const { data: job, isLoading } = useGetJobByIdQuery(jobId);
   const [applyForJob] = useApplyForJobMutation();
   const [success, setSuccess] = useState(false);
-  const dispatch = useDispatch();
-  const currentUserRole = dispatch(selectCurrentUserRole);
+  const currentUserRole = useSelector(selectCurrentUserRole);
   const typeSwitch = (type) => {
     switch (type) {
       case "full-time":
@@ -55,14 +54,19 @@ function JobDetails() {
               {currentUserRole === "jobseeker" && (
                 <Button
                   variant="contained"
-                  color="primary"
                   onClick={handleClick}
+                  size="small"
+                  sx={{ background: "#1e293b" }}
                 >
                   Jelentkezés
                 </Button>
               )}
-              {success && <p>A jelentkezés sikeresen megtörtént</p>}
             </Box>
+            {success && (
+              <p style={{ textAlign: "right", color: "green" }}>
+                A jelentkezés sikeresen megtörtént
+              </p>
+            )}
             <Typography variant="h5" component="h2" gutterBottom>
               Cég részletei
             </Typography>

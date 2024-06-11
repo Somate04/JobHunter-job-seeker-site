@@ -29,6 +29,7 @@ function SignUp() {
     const password = passwordRef.current.value;
     const name = nameRef.current.value;
     const experiencesString = experienceRef.current.value;
+
     try {
       await authRegister({
         email: email,
@@ -69,43 +70,80 @@ function SignUp() {
 
   return (
     <form onSubmit={HandleSubmit}>
-      <p>Munkavállaló</p>
-      <Switch checked={checked} onChange={HandleSwitchChange} />
-      <p>Munkáltató</p>
-      <TextField
-        inputRef={nameRef}
-        variant="standard"
-        type="text"
-        id="name"
-        label="Teljes név"
-        autoFocus
-      />
-      <TextField
-        inputRef={emailRef}
-        variant="standard"
-        type="text"
-        id="email"
-        label="Email cím"
-      />
-      <TextField
-        inputRef={passwordRef}
-        variant="standard"
-        type="password"
-        id="password"
-        label="Jelszó"
-      />
-      <TextField
-        inputRef={experienceRef}
-        variant="standard"
-        type="type"
-        id="experience"
-        label="Munka tapasztalat"
-        style={{ display: checked ? "none" : "block" }}
-        multiline={true}
-        rows={10}
-        fullWidth={true}
-      />
-      <Button variant="standard" type="submit">
+      <table
+        style={{
+          marginTop: "5%",
+          marginLeft: "auto",
+          marginRight: "auto",
+          borderSpacing: "10px",
+        }}
+      >
+        <tr>
+          <td>
+            <p>Munkavállaló</p>
+          </td>
+          <td>
+            <Switch checked={checked} onChange={HandleSwitchChange} color="" />
+          </td>
+          <td>
+            <p>Munkáltató</p>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <TextField
+              inputRef={nameRef}
+              variant="outlined"
+              type="text"
+              id="name"
+              label="Teljes név"
+              autoFocus
+              required
+            />
+          </td>
+          <td>
+            <TextField
+              inputRef={emailRef}
+              variant="outlined"
+              type="text"
+              id="email"
+              label="Email cím"
+              required
+            />
+          </td>
+          <td>
+            <TextField
+              inputRef={passwordRef}
+              variant="outlined"
+              type="password"
+              id="password"
+              label="Jelszó"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colSpan={3}>
+            <TextField
+              inputRef={experienceRef}
+              variant="outlined"
+              type="type"
+              id="experience"
+              label="Munka tapasztalat"
+              style={{ display: checked ? "none" : "block" }}
+              multiline={true}
+              rows={10}
+              fullWidth={true}
+              required={!checked}
+            />
+          </td>
+        </tr>
+      </table>
+      <Button
+        variant="contained"
+        type="submit"
+        sx={{ background: "#1e293b", margin: "10px" }}
+      >
         Regisztrálás
       </Button>
     </form>

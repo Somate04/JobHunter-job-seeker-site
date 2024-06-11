@@ -60,11 +60,36 @@ function Home() {
   };
   return (
     <>
-      <TextField id="outlined-basic" label="Keresés" variant="outlined" />
-      <Button variant="contained" startIcon={<SearchIcon />}>
+      <p
+        style={{
+          textAlign: "left",
+          marginTop: "5%",
+          marginLeft: "14.5%",
+          marginBottom: "0",
+          fontWeight: "bold",
+          fontSize: "large",
+        }}
+      >
+        Böngéssz az állások között:
+      </p>
+      <TextField
+        id="outlined-basic"
+        label="Keresés"
+        variant="outlined"
+        sx={{ width: "55%", marginBottom: "50px" }}
+      />
+      <Button
+        variant="contained"
+        startIcon={<SearchIcon />}
+        sx={{ padding: "15px", marginLeft: "5px", background: "#1e293b" }}
+      >
         Keresés
       </Button>
-      <Button onClick={() => setIsOpen(true)} startIcon={<CreateIcon />}>
+      <Button
+        onClick={() => setIsOpen(true)}
+        startIcon={<CreateIcon />}
+        sx={{ padding: "15px", marginLeft: "5px", color: "#1e293b" }}
+      >
         Szűrés
       </Button>
       {isOpen && (

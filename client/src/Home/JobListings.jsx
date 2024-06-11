@@ -15,10 +15,13 @@ function JobListings({ jobs }) {
     }
   };
   return (
-    <List sx={{ width: "75%" }}>
+    <List sx={{ width: "75%", marginLeft: "12%" }}>
+      <ListItem key="name" divider sx={{ color: "grey" }}>
+        ÁLLÁS NEVE
+      </ListItem>
       {jobs.map((job) => (
-        <Link to={`/jobdescription/${job.id}`}>
-          <ListItem key={job.id}>
+        <Link to={`/jobdescription/${job.id}`} style={{ color: "black" }}>
+          <ListItem key={job.id} divider>
             <ListItemText
               primary={job.position}
               secondary={

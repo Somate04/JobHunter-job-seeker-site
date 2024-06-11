@@ -32,22 +32,27 @@ function Login() {
   };
 
   return (
-    <form onSubmit={HandleSubmit}>
+    <form onSubmit={HandleSubmit} style={{ marginTop: "5%" }}>
       <TextField
         inputRef={emailRef}
-        variant="standard"
+        variant="outlined"
         type="text"
         id="email"
         label="Email cím"
       />
       <TextField
         inputRef={passwordRef}
-        variant="standard"
+        variant="outlined"
         type="password"
         id="password"
         label="Jelszó"
+        sx={{ marginLeft: "10px" }}
       />
-      <Button variant="standard" type="submit" color="error">
+      <Button
+        variant="contained"
+        type="submit"
+        sx={{ background: "#1e293b", padding: "15px", marginLeft: "10px" }}
+      >
         Bejelentkezés
       </Button>
     </form>

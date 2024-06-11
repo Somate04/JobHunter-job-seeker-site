@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { selectCurrentUser, selectCurrentUserRole } from "../state/authSlice";
 import { Button } from "@mui/material";
 import { logout } from "../state/authSlice";
+import "./Navigation.css";
+import WorkIcon from "@mui/icons-material/Work";
 
 function Navigation() {
   const user = useSelector(selectCurrentUser);
@@ -18,7 +20,10 @@ function Navigation() {
   return (
     <nav>
       <NavLink exact="true" to="/" className="item">
-        <i className="jobbhunter icon"></i> JobHunter
+        <i className="jobbhuntericon">
+          <WorkIcon />
+        </i>{" "}
+        JobHunter
       </NavLink>
       {!user ? (
         <>
@@ -43,7 +48,7 @@ function Navigation() {
               <i className="register icon"></i> Álláshirdetés hozzáadása
             </NavLink>
           )}
-          <Button variant="standard" onClick={handleClick}>
+          <Button variant="standard" onClick={handleClick} className="button">
             Kijelentkezés
           </Button>
         </>

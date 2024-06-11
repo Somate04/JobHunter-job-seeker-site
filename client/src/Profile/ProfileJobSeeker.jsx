@@ -29,11 +29,20 @@ function ProfileJobSeeker() {
         <Box sx={{ my: 4 }}>
           <Box mt={4} component={Paper} p={4} elevation={3}>
             <Box display="flex" justifyContent="flex-end">
-              <Button startIcon={<CreateIcon />}>
+              <Button
+                startIcon={<CreateIcon />}
+                size="small"
+                sx={{ color: "#1e293b" }}
+              >
                 Tapasztalatok szerkesztése
               </Button>
             </Box>
-            <Typography variant="h5" component="h2" gutterBottom>
+            <Typography
+              variant="h5"
+              component="h2"
+              gutterBottom
+              sx={{ textAlign: "center" }}
+            >
               Személyes adatok
             </Typography>
             <TableContainer>

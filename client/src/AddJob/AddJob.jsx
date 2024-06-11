@@ -1,15 +1,12 @@
 import {
   Checkbox,
   TextField,
-  Select,
   MenuItem,
   OutlinedInput,
-  InputLabel,
   Button,
   Slider,
 } from "@mui/material";
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useRegisterJobMutation } from "../state/api/jobApiSlice";
 
@@ -59,76 +56,120 @@ function AddJob() {
   };
   return (
     <form onSubmit={HandleSubmit}>
-      <TextField
-        inputRef={companyRef}
-        variant="standard"
-        type="text"
-        id="company"
-        label="Cég"
-        autoFocus
-      />
-      <TextField
-        inputRef={positionRef}
-        variant="standard"
-        type="text"
-        id="position"
-        label="Pozíció"
-      />
-      <TextField
-        inputRef={descriptionRef}
-        variant="standard"
-        type="type"
-        id="description"
-        label="Leírás"
-        multiline={true}
-        rows={10}
-        fullWidth={true}
-      />
-      <p>Fizetési sáv</p>
-      <Slider
-        value={range}
-        onChange={handleRange}
-        min={0}
-        max={2000000}
-        step={10000}
-        marks
-        valueLabelDisplay="on"
-        valueLabelFormat={(value) => (
-          <div>
-            {new Intl.NumberFormat("hu-HU", {
-              style: "currency",
-              currency: "HUF",
-              maximumSignificantDigits: 6,
-            }).format(value)}
-          </div>
-        )}
-      />
-      <TextField
-        id="select"
-        variant="standard"
-        value={type}
-        label="Foglalkoztatás formája"
-        select
-        sx={{ minWidth: 200 }}
-        onChange={handleChange}
-        input={<OutlinedInput label="Foglalkoztatás formája" />}
+      <table
+        cellSpacing={10}
+        style={{ marginTop: "5%", marginLeft: "auto", marginRight: "auto" }}
       >
-        <MenuItem value={"full-time"}>Teljes állás</MenuItem>
-        <MenuItem value={"part-time"}>Részmunkaidős</MenuItem>
-        <MenuItem value={"internship"}>Gyakornoki</MenuItem>
-      </TextField>
-      <TextField
-        inputRef={cityRef}
-        variant="standard"
-        type="text"
-        id="city"
-        label="Település"
-      />
-      <Checkbox onChange={handleCheck} value={homeOffice} id="homeOffice" />{" "}
-      Home Office
-      <Button variant="standard" type="submit">
-        Regisztrálás
-      </Button>
+        <tr>
+          <td>
+            <TextField
+              inputRef={companyRef}
+              variant="outlined"
+              type="text"
+              id="company"
+              label="Cég"
+              autoFocus
+            />
+          </td>
+          <td>
+            <TextField
+              inputRef={positionRef}
+              variant="outlined"
+              type="text"
+              id="position"
+              label="Pozíció"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colSpan={3}>
+            <TextField
+              inputRef={descriptionRef}
+              variant="outlined"
+              type="type"
+              id="description"
+              label="Leírás"
+              multiline={true}
+              rows={10}
+              fullWidth={true}
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td colSpan={3}>
+            <p>Fizetési sáv</p>
+          </td>
+        </tr>
+        <tr>
+          <td colSpan={3}>
+            <Slider
+              sx={{ color: "#1e293b" }}
+              value={range}
+              onChange={handleRange}
+              min={0}
+              max={2000000}
+              step={10000}
+              valueLabelDisplay="on"
+              valueLabelFormat={(value) => (
+                <div>
+                  {new Intl.NumberFormat("hu-HU", {
+                    style: "currency",
+                    currency: "HUF",
+                    maximumSignificantDigits: 6,
+                  }).format(value)}
+                </div>
+              )}
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <TextField
+              id="select"
+              variant="outlined"
+              value={type}
+              label="Foglalkoztatás formája"
+              select
+              sx={{ minWidth: 200 }}
+              onChange={handleChange}
+              input={<OutlinedInput label="Foglalkoztatás formája" />}
+            >
+              <MenuItem value={"full-time"}>Teljes állás</MenuItem>
+              <MenuItem value={"part-time"}>Részmunkaidős</MenuItem>
+              <MenuItem value={"internship"}>Gyakornoki</MenuItem>
+            </TextField>
+          </td>
+          <td>
+            <TextField
+              inputRef={cityRef}
+              variant="outlined"
+              type="text"
+              id="city"
+              label="Település"
+            />
+          </td>
+          <td>
+            <Checkbox
+              onChange={handleCheck}
+              value={homeOffice}
+              id="homeOffice"
+            />{" "}
+            Home Office
+          </td>
+        </tr>
+        <tr>
+          <td colSpan={3}>
+            <Button
+              variant="contained"
+              type="submit"
+              sx={{ background: "#1e293b" }}
+            >
+              Regisztrálás
+            </Button>
+          </td>
+        </tr>
+      </table>
     </form>
   );
 }
